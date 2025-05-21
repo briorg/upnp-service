@@ -40,8 +40,8 @@ jobs:
         id: push
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
-          file: ./docker-image/Dockerfile
+          context: ./docker-image
+          file: Dockerfile
           push: ${{  github.event_name != 'pull_request'  }}
           tags: ${{  github.ref_name == github.event.repository.default_branch && 'latest' || github.ref_name }}
           # tags: ${{ steps.meta.outputs.tags }}
