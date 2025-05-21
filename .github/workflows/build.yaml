@@ -43,8 +43,9 @@ jobs:
           context: .
           file: ./docker-image/Dockerfile
           push: ${{  github.event_name != 'pull_request'  }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{  github.ref_name == github.event.repository.default_branch && 'latest' || github.ref_name }}
+          # tags: ${{ steps.meta.outputs.tags }}
+          #labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
